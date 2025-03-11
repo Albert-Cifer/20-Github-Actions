@@ -5,8 +5,9 @@ import db from './config/connection.js';
 import routes from './routes/index.js';
 
 const app = express();
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
-const HOST = '0.0.0.0'; // Bind to all available IP addresses
+//const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
+const PORT = process.env.PORT || 3001;
+//const HOST = '0.0.0.0'; // Bind to all available IP addresses
 
 // Fix for __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -29,7 +30,12 @@ app.get('*', (_req, res) => {
 
 // Start the server after the database connection is established
 db.once('open', () => {
+  /*
   app.listen(PORT, HOST, () => {
     console.log(`🌍 Now listening on http://${HOST}:${PORT}`);
+  });
+  */
+  app.listen(PORT, () => {
+    console.log(`🌍 Now listening on http://localhost:${PORT}`);
   });
 });
